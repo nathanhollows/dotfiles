@@ -1,0 +1,25 @@
+rofi.color-enabled: true
+
+rofi.lines: 5
+rofi.eh: 2
+rofi.padding: 200
+rofi.fullscreen: true
+rofi.bw: 0
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+
+rofi.terminal : xfce4-terminal -e 
+
+!                  'background', 'border', 'separator'
+rofi.color-window: argb:ee282C34
+
+! State:           'bg',     'fg',     'bgalt',  'hlbg',   'hlfg'
+rofi.color-normal: argb:031d1f21, #ABB2BF, argb:031d1f21, argb:031d1f21, #fff 
+rofi.color-urgent: argb:031d1f21, #ABB2BF, argb:bc303541, argb:031d1f21, #fff
+rofi.color-active: argb:031d1f21, #ABB2BF, argb:031d1f21, argb:031d1f21, #fff
+
+rofi.font: System San Francisco Display 18
+
+rofi.columns: 2
+
+rofi.fake-background: 'background'
