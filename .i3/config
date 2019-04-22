@@ -61,6 +61,7 @@ exec --no-startup-id pa-applet
 
 # Start Applications
 bindsym $mod+Ctrl+b exec xfce4-terminal -e 'bmenu'
+bindsym $mod+F4 exec xfce4-terminal -e 'ranger'
 bindsym $mod+Tab exec rofi -show window
 bindsym $mod+F3 exec pcmanfm
 bindsym $mod+F2 exec firefox
