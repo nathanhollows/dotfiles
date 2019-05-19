@@ -10,7 +10,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -20,6 +19,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'joshdick/onedark.vim'
 Plugin 'vim'
 Plugin 'command-t'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,6 +51,7 @@ set number
 filetype indent on
 set showmatch
 syntax enable
+syntax on
 au BufRead,BufNewFile *.volt set filetype=volt
 colorscheme onedark 
 " set background=dark
@@ -63,3 +64,4 @@ nnoremap <C-H> <C-W><C-H>
 inoremap jj <Esc>
 runtime macros/matchit.vim
 map <leader>c :w! \| !~/.scripts/compiler.sh <c-r>%<CR>
+map <leader>p :!zathura %:r.pdf <CR>

@@ -36,9 +36,9 @@ alias df='df -h | grep sd |\
     sed -e "s_/mnt/[-_A-Za-z0-9]*_\x1b[34;1m&\x1b[0m_"'
 
 # bookmarks
-alias dl='cd ~/Downloads; la'
-alias doc='cd ~/Documents; la'
-alias docs='cd ~/Documents; la'
+alias dl='cd ~/Downloads'
+alias doc='cd ~/Documents'
+alias docs='cd ~/Documents'
 
 # shortcuts
 alias c='clear'
@@ -53,6 +53,8 @@ alias burndown='task burndown.daily'
 alias ctask='clear && task'
 alias cfv='vim ~/.vimrc'
 alias cf3='vim ~/.i3/config'
+alias cfr='vim ~/.config/ranger/rc.conf'
+alias cfz='vim ~/.zshrc'
 # rofi-apps
 alias rofi-apps='rofi -sidebar-mode -modi run,drun,window -lines 12 -width 60 -location 0 -show drun -columns 3'
 

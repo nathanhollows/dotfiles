@@ -65,7 +65,7 @@ bindsym $mod+F4 exec xfce4-terminal -e 'ranger'
 bindsym $mod+Tab exec rofi -show window
 bindsym $mod+F3 exec pcmanfm
 bindsym $mod+F2 exec firefox
-bindsym $mod+F1 exec xfce4-terminal --geometry 104x35 -e '.scripts/tasks.sh' -H -T 'taskwarrior'
+bindsym $mod+F1 exec xfce4-terminal --geometry 106x35 -e '.scripts/tasks.sh' -H -T 'taskwarrior'
 bindsym $mod+c exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -columns 1
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
@@ -203,6 +203,7 @@ for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Nm-connection-editor"] floating enable sticky enable border normal
 for_window [class="Manjaro-hello"] floating enable
 for_window [class="Manjaro Settings Manager"] floating enable border normal
 for_window [title="MuseScore: Play Panel"] floating enable

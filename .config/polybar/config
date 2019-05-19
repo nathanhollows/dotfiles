@@ -35,7 +35,7 @@ font-3 = Font Awesome 5 Free Regular:size=12;3
 
 modules-left = i3
 modules-center = date
-modules-right = xbacklight volume wireless battery powermenu
+modules-right = xbacklight volume wireless openvpn battery powermenu
 
 tray-position = right
 tray-transparent = false
@@ -130,8 +130,7 @@ label-urgent-padding = 2
 
 [module/xbacklight]
 type = internal/xbacklight
-
-label =   %percentage%%
+label = %{A:~/.scripts/redshifttoggle.sh:} %percentage%%%{A} 
 
 [module/cpu]
 type = internal/cpu
@@ -203,6 +202,12 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
+
+[module/openvpn]
+type = custom/script
+exec = ~/.scripts/openvpn-status.sh
+click-left = exec ~/.scripts/openvpntoggle.sh
+interval = 5
 
 [global/wm]
 margin-top = 5
