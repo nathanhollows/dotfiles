@@ -35,7 +35,7 @@ font-3 = Font Awesome 5 Free Regular:size=12;3
 
 modules-left = i3
 modules-center = date
-modules-right = xbacklight volume wireless openvpn battery powermenu
+modules-right = tasks xbacklight volume wireless openvpn battery powermenu
 
 tray-position = right
 tray-transparent = false
@@ -130,7 +130,7 @@ label-urgent-padding = 2
 
 [module/xbacklight]
 type = internal/xbacklight
-label = %{A:~/.scripts/redshifttoggle.sh:} %percentage%%%{A} 
+label = %{A:~/.scripts/redshifttoggle.sh:}  %percentage%%%{A} 
 
 [module/cpu]
 type = internal/cpu
@@ -207,6 +207,12 @@ screenchange-reload = true
 type = custom/script
 exec = ~/.scripts/openvpn-status.sh
 click-left = exec ~/.scripts/openvpntoggle.sh
+interval = 5
+
+[module/tasks]
+type = custom/script
+exec = ~/.scripts/task-status.sh
+click-left = exec xfce4-terminal --geometry 106x35 -e '.scripts/tasks.sh' -T 'taskwarrior'
 interval = 5
 
 [global/wm]

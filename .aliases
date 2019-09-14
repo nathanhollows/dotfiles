@@ -53,6 +53,7 @@ alias burndown='task burndown.daily'
 alias ctask='clear && task'
 alias cfv='vim ~/.vimrc'
 alias cf3='vim ~/.i3/config'
+alias cfp='vim .config/polybar/config'
 alias cfr='vim ~/.config/ranger/rc.conf'
 alias cfz='vim ~/.zshrc'
 # rofi-apps

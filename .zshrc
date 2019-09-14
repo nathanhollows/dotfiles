@@ -101,3 +101,6 @@ stty -ixon
 VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
 export VISUAL=vim
 export EDITOR=vim
+# OPS config
+export OPS_DIR="$HOME/.ops"
+export PATH="$HOME/.ops/bin:$PATH"

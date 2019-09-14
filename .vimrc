@@ -13,10 +13,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jacoborus/tender.vim'
 Plugin 'RRethy/vim-illuminate'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
 Plugin 'joshdick/onedark.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim'
 Plugin 'command-t'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
@@ -41,26 +43,67 @@ filetype plugin indent on    " required
 let g:airline_powerline_fonts=1
 let g:airline_theme = 'onedark'
 
-" Custom Config
-
+"
+" Basic Settings
+"
+set shell=/bin/zsh
 set encoding=utf-8
+set number
+
+"
+" Tab Settings
+"
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
-set number
+
+"
+" Search Settings
+"
+set ignorecase
+set smartcase
+set wrapscan
+set nohlsearch
+set incsearch
+
+noremap n nzz
+noremap N Nzz
+
+"
+" Window resizing using arrow keys
+"
+nnoremap <silent> <Right> :call utils#intelligentVerticalResize('right')<CR>
+nnoremap <silent> <Left> :call utils#intelligentVerticalResize('left')<CR>
+nnoremap <silent> <Up> :resize +1<CR>
+nnoremap <silent> <Down> :resize -1<CR>
+
+"
+" Run files
+"
+nnoremap <silent> <F5> :call utils#runFile()<CR>
+
+"
+" Enable mouse and override scrolling
+"
+set mouse=a
+map <ScrollWheelDown> <C-Y>
+map <ScrollWheelUp> <C-E>
+
+" 
+" Strip trailing space on save
+"
+autocmd BufWritePre *.java :%s/\s\+$//e
+
 filetype indent on
 set showmatch
 syntax enable
 syntax on
 au BufRead,BufNewFile *.volt set filetype=volt
 colorscheme onedark 
-" set background=dark
-set termguicolors
+set background=dark
+" set termguicolors
 hi Normal ctermbg=none
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 inoremap jj <Esc>
 runtime macros/matchit.vim
 map <leader>c :w! \| !~/.scripts/compiler.sh <c-r>%<CR>
