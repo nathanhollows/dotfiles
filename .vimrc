@@ -1,54 +1,34 @@
-hi Normal ctermbg=none
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+Plug 'junegunn/goyo.vim'
+Plug 'reedes/vim-pencil'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/limelight.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mbbill/undotree'
+Plug 'plasticboy/vim-markdown'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'RRethy/vim-illuminate'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-surround'
-Plugin 'joshdick/onedark.vim'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim'
-Plugin 'command-t'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
+" Initialize plugin system
+call plug#end()
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+set nocompatible
+filetype plugin on       " may already be in your .vimrc
 
-" Custom Config
+let mapleader = ","
+let maplocalleader = "\\"
+set mouse=a
+
+set fillchars+=vert:\ 
+
+let g:limelight_conceal_ctermfg = 'DarkGrey'
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 
 let g:airline_powerline_fonts=1
-let g:airline_theme = 'onedark'
-
-"
-" Basic Settings
-"
-set shell=/bin/zsh
-set encoding=utf-8
-set number
+let g:airline_theme='onedark'
 
 "
 " Tab Settings
@@ -56,7 +36,6 @@ set number
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set expandtab
 
 "
 " Search Settings
@@ -67,44 +46,66 @@ set wrapscan
 set nohlsearch
 set incsearch
 
-noremap n nzz
-noremap N Nzz
-
-"
-" Window resizing using arrow keys
-"
-nnoremap <silent> <Right> :call utils#intelligentVerticalResize('right')<CR>
-nnoremap <silent> <Left> :call utils#intelligentVerticalResize('left')<CR>
+" Shortcuts ---------------------- {{{
+inoremap jj <esc>
+nnoremap <leader><space> viw
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+nnoremap H ^
+nnoremap L $
+nnoremap <silent> <right> <c-w>>
+nnoremap <silent> <left> <c-w><
 nnoremap <silent> <Up> :resize +1<CR>
 nnoremap <silent> <Down> :resize -1<CR>
+noremap <F11> :Goyo<cr>
+noremap n nzz
+noremap N Nzz
+" }}}
 
-"
-" Run files
-"
-nnoremap <silent> <F5> :call utils#runFile()<CR>
+" Markdown file settings ---------------------- {{{
+augroup md
+	autocmd!
+	autocmd BufRead *.md :PencilSoft
+	autocmd BufRead *.md :let g:markdown_folding = 1
+	autocmd FileType markdown setlocal foldlevel=99
+	autocmd FileType markdown :inoremap <buffer> @@ [@]<left>
+	" Around / Inside Reference ([@ref])
+	autocmd FileType markdown :onoremap <buffer> ar a[
+	autocmd FileType markdown :onoremap <buffer> ir i[
+	" Quick reference syntax
+	autocmd FileType markdown :inoremap <buffer> @@ [@]<left>
+	" Inside Header (## Header)
+	autocmd FileType markdown :onoremap <buffer> ih :<c-u> execute "normal! ?^#\\+\\s\r:nohlsearch\rwvg_"<cr>
+	" Abbreviations
+	autocmd FileType markdown :iabbrev <buffer> ARG alternate reality game
+	" Todo : ir = from @ to ] OR @ to ;, for next @
+augroup end
+" }}}
 
-"
-" Enable mouse and override scrolling
-"
-set mouse=a
-map <ScrollWheelDown> <C-Y>
-map <ScrollWheelUp> <C-E>
+" Writer's diet script  ---------------------- {{{
+augroup diet 
+	autocmd!
+	" Set up highlighting groups
+	autocmd FileType markdown :highlight Waste ctermfg=darkgreen guifg=darkgreen cterm=bold gui=bold
+	autocmd FileType markdown :highlight Be ctermfg=darkred guifg=darkred cterm=bold gui=bold
+	autocmd FileType markdown :highlight Adwords ctermfg=yellow guifg=yellow cterm=bold gui=bold
+	autocmd FileType markdown :highlight Noms ctermfg=blue guifg=blue cterm=bold gui=bold
+	autocmd FileType markdown :highlight Prepositions ctermfg=darkcyan guifg=darkcyan cterm=bold gui=bold
+	" Set up word groups
+	let wastewords = '\<this\>\|\<that\>\|\<there\>\|\<it\>'
+	let beverbs = '\<be\>\|\<is\>\|\<am\>\|\<are\>\|\<was\>\|\<were\>\|\<being\>\|\<been\>'
+	let prepositions = '\<about\>\|\<above\>\|\<across\>\|\<after\>\|\<against\>\|\<along\>\|\<among\>\|\<around\>\|\<at\>\|\<before\>\|\<behind\>\|\<below\>\|\<beneath\>\|\<beside\>\|\<between\>\|\<beyond\>\|\<by\>\|\<down\>\|\<during\>\|\<far\>\|\<from\>\|\<in\>\|\<inside\>\|\<into\>\|\<like\>\|\<near\>\|\<of\>\|\<off\>\|\<on\>\|\<onto\>\|\<out\>\|\<outside\>\|\<over\>\|\<past\>\|\<since\>\|\<through\>\|\<throughout\>\|\<till\>\|\<to\>\|\<toward\>\|\<under\>\|\<underneath\>\|\<until\>\|\<up\>\|\<upon\>\|\<with\>\|\<within\>\|\<without\>'
+	let adverbs = '\<\w*ly\>\|\<\w*able\>\|\<\w*ac\>\|\<\w*any\>\|\<\w*al\>\|\<\w*ary\>\|\<\w*ful\>\|\<\w*ible\>\|\<\w*ic\>\|\<\w*ive\>\|\<\w*less\>\|\<\w*ly\>\|\<\w*ous\>'
+	let noms = '\<\w*ion\>\|\<\w*ism\>\|\<\w*ty\>\|\<\w*ment\>\|\<\w*ness\>\|\<\w*ance\>\|\<\w*ence\>\\|^\<reality\>'
+	autocmd FileType markdown :noremap <buffer> <F5> :setlocal spell! spelllang=en_gb<CR>
+	autocmd FileType markdown :noremap <buffer> <leader>w 
+				\:let ww = matchadd("Waste", wastewords)<cr><bar>
+				\:let pw = matchadd("Prepositions", prepositions)<cr><bar>
+				\:let bw = matchadd("Be", beverbs)<cr><bar>
+				\:let nw = matchadd("Noms", noms)<cr><bar>
+				\:let aw = matchadd("Adwords", adverbs)<cr>
+	autocmd FileType markdown :noremap <buffer> <leader>nw :call clearmatches()<cr>
+augroup end
+" }}}
 
-" 
-" Strip trailing space on save
-"
-autocmd BufWritePre *.java :%s/\s\+$//e
-
-filetype indent on
-set showmatch
-syntax enable
-syntax on
-au BufRead,BufNewFile *.volt set filetype=volt
-colorscheme onedark 
-set background=dark
-" set termguicolors
-hi Normal ctermbg=none
-inoremap jj <Esc>
-runtime macros/matchit.vim
-map <leader>c :w! \| !~/.scripts/compiler.sh <c-r>%<CR>
-map <leader>p :!zathura %:r.pdf <CR>
