@@ -30,6 +30,8 @@ let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 let g:airline_powerline_fonts=1
 let g:airline_theme='onedark'
 
+set hidden
+
 "
 " Tab Settings
 "
@@ -40,7 +42,6 @@ set softtabstop=4
 "
 " Search Settings
 "
-set ignorecase
 set smartcase
 set wrapscan
 set nohlsearch
@@ -93,11 +94,11 @@ augroup diet
 	autocmd FileType markdown :highlight Noms ctermfg=blue guifg=blue cterm=bold gui=bold
 	autocmd FileType markdown :highlight Prepositions ctermfg=darkcyan guifg=darkcyan cterm=bold gui=bold
 	" Set up word groups
-	let wastewords = '\<this\>\|\<that\>\|\<there\>\|\<it\>'
-	let beverbs = '\<be\>\|\<is\>\|\<am\>\|\<are\>\|\<was\>\|\<were\>\|\<being\>\|\<been\>'
-	let prepositions = '\<about\>\|\<above\>\|\<across\>\|\<after\>\|\<against\>\|\<along\>\|\<among\>\|\<around\>\|\<at\>\|\<before\>\|\<behind\>\|\<below\>\|\<beneath\>\|\<beside\>\|\<between\>\|\<beyond\>\|\<by\>\|\<down\>\|\<during\>\|\<far\>\|\<from\>\|\<in\>\|\<inside\>\|\<into\>\|\<like\>\|\<near\>\|\<of\>\|\<off\>\|\<on\>\|\<onto\>\|\<out\>\|\<outside\>\|\<over\>\|\<past\>\|\<since\>\|\<through\>\|\<throughout\>\|\<till\>\|\<to\>\|\<toward\>\|\<under\>\|\<underneath\>\|\<until\>\|\<up\>\|\<upon\>\|\<with\>\|\<within\>\|\<without\>'
-	let adverbs = '\<\w*ly\>\|\<\w*able\>\|\<\w*ac\>\|\<\w*any\>\|\<\w*al\>\|\<\w*ary\>\|\<\w*ful\>\|\<\w*ible\>\|\<\w*ic\>\|\<\w*ive\>\|\<\w*less\>\|\<\w*ly\>\|\<\w*ous\>'
-	let noms = '\<\w*ion\>\|\<\w*ism\>\|\<\w*ty\>\|\<\w*ment\>\|\<\w*ness\>\|\<\w*ance\>\|\<\w*ence\>\\|^\<reality\>'
+	let wastewords = '\c\<this\>\|\<that\>\|\<there\>\|\<it\>'
+	let beverbs = '\c\<be\>\|\<is\>\|\<am\>\|\<are\>\|\<was\>\|\<were\>\|\<being\>\|\<been\>'
+	let prepositions = '\c\<about\>\|\<above\>\|\<across\>\|\<after\>\|\<against\>\|\<along\>\|\<among\>\|\<around\>\|\<at\>\|\<before\>\|\<behind\>\|\<below\>\|\<beneath\>\|\<beside\>\|\<between\>\|\<beyond\>\|\<by\>\|\<down\>\|\<during\>\|\<far\>\|\<from\>\|\<in\>\|\<inside\>\|\<into\>\|\<like\>\|\<near\>\|\<of\>\|\<off\>\|\<on\>\|\<onto\>\|\<out\>\|\<outside\>\|\<over\>\|\<past\>\|\<since\>\|\<through\>\|\<throughout\>\|\<till\>\|\<to\>\|\<toward\>\|\<under\>\|\<underneath\>\|\<until\>\|\<up\>\|\<upon\>\|\<with\>\|\<within\>\|\<without\>'
+	let adverbs = '\c\<\w*ly\>\|\<\w*able\>\|\<\w*ac\>\|\<\w*any\>\|\<\w*al\>\|\<\w*ary\>\|\<\w*ful\>\|\<\w*ible\>\|\<\w*ic\>\|\<\w*ive\>\|\<\w*less\>\|\<\w*ly\>\|\<\w*ous\>'
+	let noms = '\c\<\w*ions*\>\|\<\w*isms*\>\|\<\w*ty\>\|\<\w*ments*\>\|\<\w*ness\>\|\<\w*ance\>\|\<\w*ence\>'
 	autocmd FileType markdown :noremap <buffer> <F5> :setlocal spell! spelllang=en_gb<CR>
 	autocmd FileType markdown :noremap <buffer> <leader>w 
 				\:let ww = matchadd("Waste", wastewords)<cr><bar>
@@ -109,3 +110,8 @@ augroup diet
 augroup end
 " }}}
 
+" 
+" Things to do:
+"
+" Highlight 'proven' in red (Avoid this word - Nancy)
+" Highlight / autocorrect 'cross sectional' to be 'cross-sectional'
