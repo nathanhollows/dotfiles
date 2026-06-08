@@ -21,7 +21,7 @@ if [ "$PKG_MGR" = "apt" ]; then
 fi
 
 # --- base packages ---
-$INSTALL_CMD zsh tmux neovim kitty
+$INSTALL_CMD zsh tmux neovim kitty zoxide
 
 # --- starship prompt ---
 curl -sS https://starship.rs/install.sh | sh
