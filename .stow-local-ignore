@@ -1,2 +1,5 @@
 scripts
-.stow-local-ignore
+\.git
+\.gitignore
+\.gitmodules
+\.stow-local-ignore
