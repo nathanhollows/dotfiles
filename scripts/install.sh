@@ -26,6 +26,9 @@ $INSTALL_CMD zsh tmux neovim kitty zoxide
 # --- starship prompt ---
 curl -sS https://starship.rs/install.sh | sh
 
+# --- atuin shell history ---
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+
 # --- tpm (tmux plugin manager) ---
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 if [ ! -d "$TPM_DIR" ]; then
