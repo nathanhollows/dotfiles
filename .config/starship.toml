@@ -1,0 +1,27 @@
+format = '$directory$git_branch$git_status$hostname$character'
+
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+
+[git_branch]
+format = ' [$branch]($style)'
+style = 'bold purple'
+
+[git_status]
+format = '[$all_status$ahead_behind]($style) '
+style = 'red'
+
+[hostname]
+ssh_only = false
+format = ' [$hostname]($style)'
+style = 'dimmed green'
+detect_env_vars = ['!CROUTON']
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
+
+[nodejs]
+disabled = true
+
