@@ -57,7 +57,7 @@ alias ~='cd ~'
 eval "$(zoxide init zsh)"
 
 export PATH="$PATH:/home/nathan/go/bin:/home/nathan/.local/bin"
-export CROUTON=1
+[[ "$(hostname)" = "crouton" ]] && export CROUTON=1
 export _ZO_DOCTOR=0
 
 # Override Fedora's nano-default-editor (/etc/profile.d/nano-default-editor.sh)
