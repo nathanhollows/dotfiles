@@ -88,10 +88,16 @@ function _git_info() {
 
 function _prompt() {
   local dir="%B%F{#81c8be}%(4~|…/%2~|%~)%f%b"
-  local host
-  [[ -z $CROUTON ]] && host="%F{#737994} %m%f"
-  local arrow="%(?.%F{#a6d189}.%F{#e78284})❯%f"
-  PROMPT=$'\n'"$dir\$(_git_info)$host $arrow "
+  local host arrow
+  if [[ -n $CROUTON ]]; then
+    # crouton: clean prompt, no hostname
+    arrow="%(?.%F{#a6d189}.%F{#e78284})❯%f"
+  else
+    # server: show hostname + amber arrow
+    host="%F{#e5c890}%m%f "
+    arrow="%F{#e5c890}❯%f"
+  fi
+  PROMPT=$'\n'"$dir\$(_git_info) $host$arrow "
 }
 
 precmd_functions+=(_prompt)
