@@ -56,18 +56,14 @@ return {
     end,
   },
 
-  -- ltex LSP: grammar/spell checking for LaTeX, Markdown, etc.
-  -- debounce_text_changes prevents "checking document" on every keypress
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        ltex = {
-          flags = { debounce_text_changes = 2000 },
+        harper_ls = {
           settings = {
-            ltex = {
-              enabled = { "latex", "tex", "bib", "markdown" },
-              language = "en-NZ",
+            ["harper-ls"] = {
+              linters = { SpellCheck = true },
             },
           },
         },
